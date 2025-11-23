@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economia della Spagna 2020-2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .presentation-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide-viewer {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .slide {
+            display: none;
+            padding: 60px 80px;
+            min-height: 600px;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        h1 {
+            color: #1e40af;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #1e40af;
+            font-size: 2em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #1e40af;
+            padding-bottom: 15px;
+        }
+        
+        h3 {
+            color: #475569;
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: #475569;
+            margin-top: 30px;
+        }
+        
+        .credit {
+            text-align: center;
+            font-size: 1em;
+            color: #64748b;
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 1.1em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .negative {
+            color: #dc2626;
+            font-weight: bold;
+        }
+        
+        .positive {
+            color: #059669;
+            font-weight: bold;
+        }
+        
+        .analisi {
+            background: linear-gradient(135deg, #f0f4f9 0%, #e0e7ff 100%);
+            padding: 20px;
+            border-left: 5px solid #1e40af;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+        }
+        
+        .analisi strong {
+            color: #1e40af;
+        }
+        
+        ul {
+            margin-left: 40px;
+            margin-top: 20px;
+        }
+        
+        li {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        
+        em {
+            color: #64748b;
+            font-style: italic;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-print {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+        }
+        
+        .slide-counter {
+            font-size: 1.1em;
+            color: #475569;
+            font-weight: 600;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .footer-text {
+            text-align: center;
+            font-size: 0.9em;
+            color: #64748b;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        @media print {
+            body {
+                background: white !important;
+            }
+            .controls {
+                display: none !important;
+            }
+            .presentation-container {
+                padding: 0 !important;
+            }
+            .slide-viewer {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+            .slide {
+                display: block !important;
+                page-break-after: always;
+                padding: 40px !important;
+                min-height: auto !important;
+            }
+            .slide:last-child {
+                page-break-after: avoid;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-viewer">
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <h1>Economia della Spagna</h1>
+                <p class="subtitle">Analisi della situazione e prospettive economiche (2020-2025)</p>
+                <p class="subtitle" style="margin-top: 60px; font-size: 1.1em;">Analisi macroeconomica | Novembre 2025</p>
+                <p class="credit">di Mario Seminerio - Realizzato con Sonnet 4.5</p>
+                <div class="footer-text" style="margin-top: 150px;">Fonte: INE, Eurostat, Banca di Spagna, Commissione Europea</div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <h2>Contenuti della Presentazione</h2>
+                <ul>
+                    <li><strong>PIL complessivo e pro capite</strong> – Andamento 2020-2025</li>
+                    <li><strong>Sostenibilità del debito</strong> – Rapporto debito/PIL</li>
+                    <li><strong>Disciplina fiscale</strong> – Deficit e deficit primario</li>
+                    <li><strong>Spesa pubblica</strong> – Dimensione e composizione</li>
+                    <li><strong>Scomposizione della crescita</strong> – Contributi per componenti</li>
+                    <li><strong>Produttività</strong> – Lavoro e TFP</li>
+                    <li><strong>Prospettive economiche</strong> – 2025-2027</li>
+                    <li><strong>Sfide strutturali</strong> – Criticità e vulnerabilità</li>
+                </ul>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide">
+                <h2>PIL Reale: Crescita Annuale (%)</h2>
+                <table>
+                    <tr>
+                        <th>Anno</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025 (stima)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Crescita PIL %</strong></td>
+                        <td class="negative">-10.94%</td>
+                        <td class="positive">+6.68%</td>
+                        <td class="positive">+6.40%</td>
+                        <td class="positive">+2.50%</td>
+                        <td class="positive">+3.50%</td>
+                        <td class="positive">+2.60%</td>
+                    </tr>
+                </table>
+                <div class="analisi">
+                    <strong>Analisi:</strong> La crisi COVID del 2020 ha causato una contrazione severa (-10.94%), seguita da una forte ripresa nel 2021-2022. La crescita nel 2024 è accelerata al 3.5% (dato INE definitivo), superiore alle previsioni iniziali. Per il 2025 la Commissione Europea stima una moderazione al 2.6%.
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide">
+                <h2>PIL Pro Capite (USD correnti)</h2>
+                <table>
+                    <tr>
+                        <th>Anno</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025 (stima)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>PIL pro capite</strong></td>
+                        <td>$24,909</td>
+                        <td>$26,542</td>
+                        <td>$28,128</td>
+                        <td>$28,830</td>
+                        <td>$29,192</td>
+                        <td>$29,981</td>
+                    </tr>
+                </table>
+                <div class="analisi">
+                    <strong>Analisi:</strong> Il PIL pro capite è aumentato costantemente del 20.3% dal 2020 al 2024. La Spagna ha recuperato completamente dalla crisi COVID ed è in traiettoria di crescita dei redditi medi pro capite.
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slide">
+                <h2>Tasso di Crescita del PIL Pro Capite - Reale (%)</h2>
+                <table>
+                    <tr>
+                        <th>Anno</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025 (stima)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Crescita PIL pro capite reale %</strong></td>
+                        <td class="negative">-10.69%</td>
+                        <td class="positive">+6.43%</td>
+                        <td class="positive">+5.55%</td>
+                        <td class="positive">+1.40%</td>
+                        <td class="positive">+2.30%</td>
+                        <td class="positive">+2.22%</td>
+                    </tr>
+                </table>
+                <div class="analisi">
+                    <strong>Analisi:</strong> Nel 2020 contrazione severa (-10.69%), seguita da robusta ripresa 2021-2022. Dal 2023 la crescita pro capite si è moderata per forte immigrazione (+1.1-1.2% annuo). Nel 2024 con PIL +3.5%, pro capite +2.3% riflettendo l'apporto demografico. Nel 2025 stabilizzazione al +2.22%. I dati sono in termini reali (aggiustati per inflazione).
+                </div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="slide">
+                <h2>Rapporto Debito/PIL (%)</h2>
+                <table>
+                    <tr>
+                        <th>Anno</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025 (stima)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Debito/PIL %</strong></td>
+                        <td>119.3%</td>
+                        <td>115.0%</td>
+                        <td>109.8%</td>
+                        <td>105.1%</td>
+                        <td>101.8%</td>
+                        <td>100.0%</td>
+                    </tr>
+                </table>
+                <div class="analisi">
+                    <strong>Analisi:</strong> Dal picco del 119.3% nel 2020, la Spagna ha ridotto l'indebitamento di 18.3 pp, grazie a crescita reale superiore alle attese e avanzi primari. Nel 2025 si raggiunge il 100% del PIL.
+                </div>
+            </div>
+
+            <!-- Slide 7 -->
+            <div class="slide">
+                <h2>Rapporto Deficit/PIL (%)</h2>
+                <table>
+                    <tr>
+                        <th>Anno</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025 (stima)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Deficit/PIL %</strong></td>
+                        <td class="negative">-10.3%</td>
+                        <td class="negative">-6.8%</td>
+                        <td class="negative">-4.6%</td>
+                        <td class="negative">-3.5%</td>
+                        <td class="negative">-3.2%</td>
+                        <td class="negative">-2.5%</td>
+                    </tr>
+                </table>
+                <div class="analisi">
+                    <strong>Analisi:</strong> Il deficit è sceso da -10.3% (2020) a -3.2% (2024), vicino alla soglia Maastricht del 3%. Per il 2025 ulteriore riduzione a -2.5% prevista. Forte disciplina fiscale per 5 anni consecutivi.
+                </div>
+            </div>
+
+            <!-- Slide 8 -->
+            <div class="slide">
+                <h2>Deficit Primario su PIL (%)</h2>
+                <p><em>Definizione: Deficit primario = deficit al netto della spesa per interessi. Misura l'avanzo/disavanzo operativo della politica fiscale.</em></p>
+                <table>
+                    <tr>
+                        <th>Anno</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025 (stima)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Deficit primario %</strong></td>
+                        <td class="negative">-6.1%</td>
+                        <td class="negative">-3.5%</td>
+                        <td class="negative">-2.3%</td>
+                        <td class="negative">-0.7%</td>
+                        <td class="negative">-0.7%</td>
+                        <td class="negative">-0.1%</td>
+                    </tr>
+                </table>
+                <div class="analisi">
+                    <strong>Analisi:</strong> Passaggio da deficit primario -6.1% (2020) a -0.7% (2024). NON vi è ancora avanzo primario. Per il 2025 quasi-pareggio previsto (-0.1%). Inversione di tendenza dal 2022 grazie a crescita reale e disciplina fiscale.
+                </div>
+            </div>
+
+            <!-- Slide 9 -->
+            <div class="slide">
+                <h2>Spesa Pubblica su PIL (%)</h2>
+                <table>
+                    <tr>
+                        <th>Anno</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025 (stima)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Spesa pubblica %</strong></td>
+                        <td>51.4%</td>
+                        <td>48.8%</td>
+                        <td>46.3%</td>
+                        <td>45.8%</td>
+                        <td>45.5%</td>
+                        <td>45.6%</td>
+                    </tr>
+                </table>
+                <div class="analisi">
+                    <strong>Analisi:</strong> La spesa pubblica è scesa dal picco di crisi del 51.4% (2020) al 45.5% (2024). Nel 2025 rimane stabile al 45.6%. Spesa contenuta rispetto alla media eurozona, indicando spazio fiscale potenziale ma limitato da vincoli UE.
+                </div>
+            </div>
+
+            <!-- Slide 10 -->
+            <div class="slide">
+                <h2>Scomposizione della Crescita PIL</h2>
+                <p><em>Ultimi 4 trimestri disponibili (contributi in punti percentuali alla crescita annua)</em></p>
+                <table>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Q4 2024</th>
+                        <th>Q1 2025</th>
+                        <th>Q2 2025</th>
+                        <th>Q3 2025</th>
+                    </tr>
+                    <tr>
+                        <td>Consumi privati</td>
+                        <td>+1.8 pp</td>
+                        <td>+1.9 pp</td>
+                        <td>+2.1 pp</td>
+                        <td>+2.0 pp</td>
+                    </tr>
+                    <tr>
+                        <td>Spesa pubblica</td>
+                        <td>+0.9 pp</td>
+                        <td>+0.8 pp</td>
+                        <td>+0.9 pp</td>
+                        <td>+0.8 pp</td>
+                    </tr>
+                    <tr>
+                        <td>Investimenti</td>
+                        <td>+0.8 pp</td>
+                        <td>+0.7 pp</td>
+                        <td>+0.6 pp</td>
+                        <td>+0.5 pp</td>
+                    </tr>
+                    <tr>
+                        <td>Esportazioni nette</td>
+                        <td class="negative">-0.4 pp</td>
+                        <td>+0.1 pp</td>
+                        <td>+0.0 pp</td>
+                        <td class="negative">-0.6 pp</td>
+                    </tr>
+                    <tr>
+                        <td>Variazione giacenze</td>
+                        <td>+0.4 pp</td>
+                        <td class="negative">-0.3 pp</td>
+                        <td class="negative">-0.5 pp</td>
+                        <td>+0.1 pp</td>
+                    </tr>
+                    <tr style="background: linear-gradient(135deg, #f0f4f9 0%, #e0e7ff 100%);">
+                        <td><strong>PIL totale</strong></td>
+                        <td><strong>+3.5%</strong></td>
+                        <td><strong>+3.2%</strong></td>
+                        <td><strong>+3.1%</strong></td>
+                        <td><strong>+2.8%</strong></td>
+                    </tr>
+                </table>
+                <div class="analisi">
+                    <strong>Analisi:</strong> La crescita è trainata dalla domanda interna (consumi privati +2.0pp, spesa pubblica +0.8pp). Gli investimenti mantengono un contributo positivo ma in calo. Le esportazioni nette sono volatili: deficit nel Q4 2024 e Q3 2025.
+                </div>
+            </div>
+
+            <!-- Slide 11 -->
+            <div class="slide">
+                <h2>Produttività del Lavoro e TFP</h2>
+                <p><em>Variazione annuale percentuale | Fonte: IVIE, Eurostat, INE</em></p>
+                
+                <h3>Produttività del Lavoro (%)</h3>
+                <table>
+                    <tr>
+                        <th>Anno</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Prod. Lavoro %</strong></td>
+                        <td class="negative">-2.5%</td>
+                        <td class="positive">+2.1%</td>
+                        <td class="negative">-0.8%</td>
+                        <td class="positive">+0.3%</td>
+                        <td class="positive">+0.5%</td>
+                        <td class="positive">+0.4%</td>
+                    </tr>
+                </table>
+                
+                <h3>TFP – Produttività Totale Fattori (%)</h3>
+                <table>
+                    <tr>
+                        <th>Anno</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025</th>
+                    </tr>
+                    <tr>
+                        <td><strong>TFP %</strong></td>
+                        <td class="negative">-2.8%</td>
+                        <td class="positive">+2.4%</td>
+                        <td class="negative">-0.3%</td>
+                        <td class="positive">+0.8%</td>
+                        <td class="positive">+1.8%</td>
+                        <td class="positive">+1.4%</td>
+                    </tr>
+                </table>
+                <div class="analisi">
+                    <strong>Analisi:</strong> Calo severo nel 2020, rimbalzo 2021. Stagnazione 2022-2023. Nel 2024 TFP accelera a +1.8%. Nel 2025 moderazione ma TFP positiva al +1.4%. Segnale positivo di recupero della competitività strutturale.
+                </div>
+            </div>
+
+            <!-- Slide 12 -->
+            <div class="slide">
+                <h2>Prospettive Economiche 2025-2027</h2>
+                <ul>
+                    <li><strong>Crescita PIL:</strong> Moderazione da 2.6% (2025) a 2.2% (2026) e 1.9% (2027)</li>
+                    <li><strong>Mercato del lavoro:</strong> Performance robusta continua a supportare consumi privati (immigrazione importante fattore)</li>
+                    <li><strong>Debito pubblico:</strong> Riduzione percorso: 100% (2025), 98.2% (2026), 97.1% (2027) – Commissione UE</li>
+                    <li><strong>Deficit pubblico:</strong> Progressivo rientro a -2.5% (2025), -2.1% (2026-2027) verso equilibrio medio termine</li>
+                    <li><strong>Vincoli strutturali:</strong> Invecchiamento popolazione, spesa per interessi crescente, pressione da mobilità demografica</li>
+                </ul>
+            </div>
+
+            <!-- Slide 13 -->
+            <div class="slide">
+                <h2>Criticità e Sfide Strutturali</h2>
+                <ul>
+                    <li><strong>Debito elevato:</strong> 100%+ del PIL rimane sopra media eurozona (87.4%). Vulnerabilità a shock</li>
+                    <li><strong>Deficit strutturale:</strong> Stimato al -2.8% del PIL, indica squilibrio strutturale persistente</li>
+                    <li><strong>Invecchiamento:</strong> Pressione sui bilanci pubblici da sanità e pensioni nel medio termine</li>
+                    <li><strong>Dipendenza dalla domanda interna:</strong> Bassi livelli di esportazioni riducono resilienza</li>
+                    <li><strong>Servizio del debito:</strong> Spesa per interessi in aumento (11.3% del PIL nel 2024)</li>
+                </ul>
+            </div>
+
+            <!-- Slide 14 -->
+            <div class="slide">
+                <h2>Conclusioni</h2>
+                <p>La Spagna ha <strong>recuperato con successo dalla crisi COVID</strong> con crescita robusta e consolidamento fiscale.</p>
+                <p>La <strong>disciplina fiscale quinquennale</strong> ha portato deficit sotto soglia Maastricht e disavanzo primario moderato.</p>
+                <p>Rimangono <strong>sfide strutturali</strong> sul debito elevato e pressioni fiscali di lungo termine.</p>
+                <div class="footer-text" style="margin-top: 120px;">
+                    Fonte dati: INE (Istituto Nazionale di Statistica Spagna), Eurostat, Banca di Spagna, BBVA Research, IVIE, Commissione Europea | Novembre 2025
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn-nav" id="prevBtn">◀ Precedente</button>
+            <span class="slide-counter" id="slideCounter">1 / 14</span>
+            <button class="btn-nav" id="nextBtn">Successiva ▶</button>
+            <button class="btn-print" onclick="window.print()">🖨️ Stampa PDF</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideCounter = document.getElementById('slideCounter');
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) showSlide(currentSlide - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) showSlide(currentSlide + 1);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>
